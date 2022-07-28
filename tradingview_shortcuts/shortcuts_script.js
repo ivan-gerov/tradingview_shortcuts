@@ -3,6 +3,16 @@ function selectTimeframe(value) {
   document.querySelector(`[data-value = '${value}']`).click();
 }
 
+function selectRectangleTool() {
+  const geometricShapesMenuAttribute =
+    '[data-name="linetool-group-geometric-shapes"]';
+  document
+    .querySelectorAll(geometricShapesMenuAttribute)[0]
+    .children[1].click();
+
+  const rectangleToolAttribute = '[data-name="LineToolRectangle"]';
+  document.querySelectorAll(rectangleToolAttribute)[0].click();
+}
 
 /* 
 
@@ -28,25 +38,22 @@ The timeframes have the following pattern
 "<number>W" - weeks 
 */
 
-
-
-
 window.addEventListener(
   "keydown",
   (e) => {
-
     // These are the shortcuts. Feel free to add more
 
-    if (e.altKey && e.keyCode == 49) {      // when altKey is pressed and key 1 is pressed -> timeframe 1 minute is selected
-      selectTimeframe("1");    // 1 minute
+    if (e.altKey && e.keyCode == 49) {
+      // when altKey is pressed and key 1 is pressed -> timeframe 1 minute is selected
+      selectTimeframe("1"); // 1 minute
     }
 
     if (e.altKey && e.keyCode == 50) {
-      selectTimeframe("15");   // 15 minutes
+      selectTimeframe("15"); // 15 minutes
     }
 
     if (e.altKey && e.keyCode == 51) {
-      selectTimeframe("60");   // 1h
+      selectTimeframe("60"); // 1h
     }
 
     if (e.altKey && e.keyCode == 52) {
@@ -57,11 +64,14 @@ window.addEventListener(
       selectTimeframe("1D");
     }
 
+    if (e.altKey && e.keyCode == 81) {
+      selectRectangleTool();
+    }
+
     // Template for a new shortcut (this is commented out code)
     // if (e.altKey && e.keyCode == <key code of keyboard key>) {
     //   selectTimeframe("<timeframe>");
     // }
-
   },
   false
 );
