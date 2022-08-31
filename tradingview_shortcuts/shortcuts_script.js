@@ -3,15 +3,35 @@ function selectTimeframe(value) {
   document.querySelector(`[data-value = '${value}']`).click();
 }
 
-function selectRectangleTool() {
-  const geometricShapesMenuAttribute =
-    '[data-name="linetool-group-geometric-shapes"]';
+function selectRectangleTool(mode) {
   document
-    .querySelectorAll(geometricShapesMenuAttribute)[0]
+    .querySelectorAll('[data-name="linetool-group-geometric-shapes"]')[0]
     .children[1].click();
+  document.querySelectorAll('[data-name="LineToolRectangle"]')[0].click();
 
-  const rectangleToolAttribute = '[data-name="LineToolRectangle"]';
-  document.querySelectorAll(rectangleToolAttribute)[0].click();
+  function openWidgetsToolbar() {
+    let element = document.getElementsByClassName(
+      "floating-toolbar-react-widgets__button"
+    )[0];
+    element.click();
+  }
+
+  setTimeout(openWidgetsToolbar, 200);
+
+  setTimeout(() => {
+    const templatesMenu = document.querySelectorAll(
+      '[data-name="templates-menu"]'
+    )[0];
+    const templates = Array.from(
+      templatesMenu.querySelectorAll('[data-label="true"]')
+    );
+
+    templates.map((el) => {
+      if (el.innerHTML.toLowerCase().includes(mode)) {
+        el.parentElement.parentElement.click();
+      }
+    });
+  }, 200);
 }
 
 /* 
@@ -43,9 +63,13 @@ window.addEventListener(
   (e) => {
     // These are the shortcuts. Feel free to add more
 
-    if (e.altKey && e.keyCode == 49) {
-      // when altKey is pressed and key 1 is pressed -> timeframe 1 minute is selected
+    if (e.altKey && e.keyCode == 192) {
+      // when altKey is pressed and key ` is pressed -> timeframe 1 minute is selected
       selectTimeframe("1"); // 1 minute
+    }
+
+    if (e.altKey && e.keyCode == 49) {
+      selectTimeframe("5"); // 5 minute
     }
 
     if (e.altKey && e.keyCode == 50) {
@@ -65,7 +89,11 @@ window.addEventListener(
     }
 
     if (e.altKey && e.keyCode == 81) {
-      selectRectangleTool();
+      selectRectangleTool("supply");
+    }
+
+    if (e.altKey && e.keyCode == 90) {
+      selectRectangleTool("demand");
     }
 
     // Template for a new shortcut (this is commented out code)
