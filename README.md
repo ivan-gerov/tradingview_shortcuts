@@ -12,11 +12,14 @@ These shortcuts are to be loaded as an extension in Chrome and Chromium based br
 
 ## Current Shortcuts
 ```
-Alt + 1 - One minute
+Alt + ` - 1 minute
+Alt + 1 - 5 minute
 Alt + 2 - 15 minutes
 Alt + 3 - 60 minutes
 Alt + 4 - 240 minutes
 Alt + 5 - One day
+Alt + Q - Rectangular Tool - Supply
+Alt + Z - Rectangular Tool - Demand
 ```
 
 > The shortcuts can be changed to also include different automatization in TradingView (or other websites). The possibilities are endless
