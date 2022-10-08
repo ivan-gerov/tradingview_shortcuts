@@ -2,14 +2,20 @@
     "name": "tradingview_shortcuts",
     "description": "Add tradingview shortcuts!",
     "version": "1.0",
-    "action":{},
-    "manifest_version": 3,
-    "permissions": ["webNavigation"],
+    "action": {},
+    "manifest_version": 2,
     "content_scripts": [
         {
-            "matches": ["https://*.tradingview.com/*"],
-            "all_framews": true,
-            "js": ["shortcuts_script.js"]
+            "run_at": "document_idle",
+            "matches": [
+                "https://*.tradingview.com/chart/*"
+            ],
+            "js": [
+                "injecter.js"
+            ]
         }
+    ],
+    "web_accessible_resources": [
+        "shortcuts_script.js"
     ]
-  }
+}

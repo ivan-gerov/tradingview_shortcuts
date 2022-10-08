@@ -1,37 +1,38 @@
 function selectTimeframe(value) {
-  document.getElementById("header-toolbar-intervals").children[0].click();
-  document.querySelector(`[data-value = '${value}']`).click();
+  window.TradingViewApi.activeChart().setResolution(value);
 }
 
-function selectRectangleTool(mode) {
-  document
-    .querySelectorAll('[data-name="linetool-group-geometric-shapes"]')[0]
-    .children[1].click();
-  document.querySelectorAll('[data-name="LineToolRectangle"]')[0].click();
+function waitForElm(selector) {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
 
-  function openWidgetsToolbar() {
-    let element = document.getElementsByClassName(
-      "floating-toolbar-react-widgets__button"
-    )[0];
-    element.click();
-  }
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
 
-  setTimeout(openWidgetsToolbar, 200);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+}
 
-  setTimeout(() => {
-    const templatesMenu = document.querySelectorAll(
-      '[data-name="templates-menu"]'
-    )[0];
-    const templates = Array.from(
-      templatesMenu.querySelectorAll('[data-label="true"]')
-    );
-
+async function selectRectangleTool(mode) {
+  window.TradingViewApi.selectLineTool("rectangle");
+  await waitForElm('[data-name="templates"]').then((elm) => elm.click());
+  await waitForElm('[data-name="templates-menu"]').then((elm) => {
+    const templates = Array.from(elm.querySelectorAll('[data-label="true"]'));
     templates.map((el) => {
       if (el.innerHTML.toLowerCase().includes(mode)) {
         el.parentElement.parentElement.click();
       }
     });
-  }, 200);
+  });
 }
 
 /* 
