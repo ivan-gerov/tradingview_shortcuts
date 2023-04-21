@@ -18,8 +18,7 @@ Alt + 2 - 15 minutes
 Alt + 3 - 60 minutes
 Alt + 4 - 240 minutes
 Alt + 5 - One day
-Alt + Q - Rectangular Tool - Supply
-Alt + Z - Rectangular Tool - Demand
+Alt + Q - Rectangular Tool
 ```
 
 > The shortcuts can be changed to also include different automatization in TradingView (or other websites). The possibilities are endless

@@ -2,7 +2,13 @@ function selectTimeframe(value) {
   window.TradingViewApi.activeChart().setResolution(value);
 }
 
-function selectRectangleTool(mode) {
+function selectRectangleTool() {
+  window.TradingViewApi.selectLineTool("rectangle")
+}
+
+
+// Legacy code that I want to keep for the future generations (in case I need it :D)
+function _selectRectangleTool(mode) {
   document
     .querySelectorAll('[data-name="linetool-group-geometric-shapes"]')[0]
     .children[1].click();
@@ -88,11 +94,7 @@ window.addEventListener(
     }
 
     if (e.altKey && e.keyCode == 81) {
-      selectRectangleTool("supply");
-    }
-
-    if (e.altKey && e.keyCode == 90) {
-      selectRectangleTool("demand");
+      selectRectangleTool();
     }
 
     // Template for a new shortcut (this is commented out code)
